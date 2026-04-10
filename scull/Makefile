@@ -14,13 +14,23 @@ LDDINC=$(PWD)/../include
 EXTRA_CFLAGS += $(DEBFLAGS)
 EXTRA_CFLAGS += -I$(LDDINC)
 
+ifneq ($(KERNELRELEASE),)
+# call from kernel build system
 
 scull-objs := main.o pipe.o access.o
 
 obj-m	:= scull.o
 
+else
+
+KERNELDIR ?= /lib/modules/$(shell uname -r)/build
+PWD       := $(shell pwd)
+
 modules:
 	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+
+endif
+
 
 
 clean:
