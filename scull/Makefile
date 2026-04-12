@@ -9,7 +9,7 @@ else
   DEBFLAGS = -O2
 endif
 
-LDDINC=$(PWD)/../include
+LDDINC=$(src)/../include
 
 EXTRA_CFLAGS += $(DEBFLAGS)
 EXTRA_CFLAGS += -I$(LDDINC)
